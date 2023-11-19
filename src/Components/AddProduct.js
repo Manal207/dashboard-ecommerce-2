@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { storage } from '../Config/Config';
+import { fs } from '../Config/Config';
 
 
 export const AddProduct = () => {
@@ -12,6 +14,59 @@ export const AddProduct = () => {
 
     const [successMsg, setSuccessMsg]= useState('');
     const [uploadError, setUploadError]= useState('');
+
+    const types =['image/jpg','image/jpeg','image/png','image/PNG'];
+
+    const handleProductImg=(e)=>{
+        let selectedFile = e.target.files[0];
+        if(selectedFile){
+            if(selectedFile&&types.includes(selectedFile.type)){
+                setImage(selectedFile);
+                setImageError('');
+            }
+            else{
+                setImage(null);
+                setImageError('please select a valid image file type (png or jpg)')
+            }
+        }
+        else{
+            console.log('please select your file');
+        }
+    }
+
+    const handleAddProducts=(e)=>{
+        e.preventDefault();
+        // console.log(productName, category, price, pieces);
+        // console.log(image);
+        const uploadTask=storage.ref(`product-images/${image.name}`).put(image);
+        uploadTask.on('state_changed',snapshot=>{
+            const progress = (snapshot.bytesTransferred/snapshot.totalBytes)*100
+            console.log(progress);
+        },error=>setUploadError(error.message),()=>{
+            storage.ref('product-images').child(image.name).getDownloadURL().then(url=>{
+                fs.collection('Products').add({
+                    productName,
+                    category,
+                    price: Number(price), 
+                    pieces: Number(pieces),
+                    url
+                }).then(()=>{
+                    setSuccessMsg('Product added successfully');
+                    setProductName('');
+                    setCategory('');
+                    setPrice(''); 
+                    setPieces('');
+                    document.getElementById('file').value='';
+                    setImageError('');
+                    setUploadError('');
+                    setTimeout(()=>{
+                        setSuccessMsg('');
+                    },3000)
+                }).catch(error=>setUploadError(error.message));
+            })
+        })
+        
+    }
 
   return (
     <div className='box1'>
@@ -34,7 +89,7 @@ export const AddProduct = () => {
 
         </div>
         <div className='prod-details'>
-            <form className='details'>
+            <form className='details' onSubmit={handleAddProducts}>
                 <label>Product Name</label>
                 <input type="text" className="form-control" onChange={(e)=>setProductName(e.target.value)} value={productName}></input>
                 <br></br>
