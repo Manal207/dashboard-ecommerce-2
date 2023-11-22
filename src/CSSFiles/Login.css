@@ -1,0 +1,128 @@
+/* Login.css */
+
+body, html {
+    height: 100%;
+    background-color: #E7E7E7; 
+    
+  }
+
+.background{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+
+}
+
+  
+
+.container {
+  width: 350px; /* Increased width */
+  height: auto; /* Height is set to auto to allow the content to dictate the total height */
+  padding: 40px; /* Increased padding */
+  padding-top: 0px;
+  text-align: center;
+  background-color: #F1F1F1;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Slightly more prominent shadow */
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+    margin-top: 0px;
+}
+
+.logo img {
+  max-width: 100%;
+}
+
+.title {
+  margin-bottom: 30px;
+  color: #000000;
+  text-align: left;
+
+  display: block;
+  font-size: 20px;
+  /* font-family: Inter; */
+  font-weight: 500;
+  word-wrap: break-word
+
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+  color: #777777;
+  font-size: 15px;
+  /* font-family: Inter; */
+  font-weight: 500;
+  word-wrap: break-word
+
+
+
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box; /* Added to retain input size */
+  background: #F1F1F1; 
+  border-radius: 5px; 
+  border: 1px #ABABAB solid
+}
+
+
+
+.btn-login {
+    width: 150px; /* Decrease the width as needed */
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: auto; /* This will push the button to the right */
+    display: block; /* Needed to allow margin to work correctly */
+
+    font-family: inherit; /* Inherits the font-family from body or parent element */
+    font-size: 1em; /* Sets the font size to match the standard text size */
+    font-weight: normal; /* Adjust weight as necessary, or use 'inherit' */
+  }
+
+.btn-login:hover {
+  background-color: #333;
+}
+
+.error-msg, .success-msg {
+  
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  word-wrap: break-word
+}
+
+.error-msg {
+  color: #f44336;
+}
+
+.success-msg {
+  color: #4caf50;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+  }
+}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Products } from './Products'
 import { fs } from '../Config/Config'
 import { useNavigate } from 'react-router-dom'
+import { Sidebar } from './Sidebar'
+import '../CSSFiles/ProductsList.css'
 
 
 
@@ -36,10 +38,16 @@ export const ProductsList = () => {
         <div>
             {products.length > 0 ? (
                 <div className='container-fluid'>
-                    <h1 className='text-center'>Products</h1>
+                    <Sidebar/>
+                    <div className='m'>
+                        <label className='Products-text'>Products</label>
+                        <br></br><br></br>
+                        <button className='btn-add' onClick={goToProductsList}>Add product</button>
+                    </div>
+                    
                     <div className='products-box'>
+                       
                         <Products products={products}/>
-                        <button onClick={goToProductsList}>Add product</button>
 
                     </div>
                 </div>

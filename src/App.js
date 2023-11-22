@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import { ProductsList } from './Components/ProductsList'
 import { AddProduct } from './Components/AddProduct'
 import { OrdersList } from './Components/OrdersList'
+import { Sidebar } from './Components/Sidebar'
 
 
 export const App = () => {
@@ -14,6 +15,7 @@ export const App = () => {
           <Route path="ProductsList" element={<ProductsList/>}/>
           <Route path="OrdersList" element={<OrdersList/>}/>
           <Route path="AddProduct" element={<AddProduct/>}/>
+          <Route path="Sidebar" element={<Sidebar/>}/>
         </Routes>
       </Router>
   )

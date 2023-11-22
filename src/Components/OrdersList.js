@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Orders } from './Orders'
 import { fs } from '../Config/Config'
 import { useNavigate } from 'react-router-dom'
+import { Sidebar } from './Sidebar'
+import '../CSSFiles/OrdersList.css'
 
 
 
@@ -33,8 +35,9 @@ export const OrdersList = () => {
         <div>
             {orders.length > 0 ? (
                 <div className='container-fluid'>
-                    <h1 className='text-center'>Orders</h1>
-                    <div className='products-box'>
+                    <Sidebar/>
+                    <label className='Orders-text'>Orders</label><br></br><br></br>
+                    <div className='orders-box'>
                         <Orders orders={orders}/>
                     </div>
                 </div>

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { storage } from '../Config/Config';
 import { fs } from '../Config/Config';
+import { Sidebar } from './Sidebar';
+import '../CSSFiles/AddProduct.css';
 
 
 export const AddProduct = () => {
@@ -15,10 +17,17 @@ export const AddProduct = () => {
     const [successMsg, setSuccessMsg]= useState('');
     const [uploadError, setUploadError]= useState('');
 
+    const [productImgUrl, setProductImgUrl] = useState("");
+
+
     const types =['image/jpg','image/jpeg','image/png','image/PNG'];
 
     const handleProductImg=(e)=>{
         let selectedFile = e.target.files[0];
+        const file = e.target.files[0];
+        if(file) {
+            setProductImgUrl(URL.createObjectURL(file));
+          }
         if(selectedFile){
             if(selectedFile&&types.includes(selectedFile.type)){
                 setImage(selectedFile);
@@ -26,11 +35,11 @@ export const AddProduct = () => {
             }
             else{
                 setImage(null);
-                setImageError('please select a valid image file type (png or jpg)')
+                setImageError('Please select a valid image file type (png or jpg)')
             }
         }
         else{
-            console.log('please select your file');
+            console.log('Please select your file');
         }
     }
 
@@ -69,44 +78,62 @@ export const AddProduct = () => {
     }
 
   return (
-    <div className='box1'>
-        <div className='img-section'>
-            <label>Add image</label>
-            <input type="file" id="file" className='file' onChange={handleProductImg}></input>
+        <div className='Add-product-component'>
+            <Sidebar/>
+            <label className='Add-product-text'>Add Product</label>
+            <br></br><br></br>
+            <div className='Sections'>
+                <div className='img-section'>
+                    <label>Add image</label>
+                    <br></br><br></br>
+                    <label for="file" class="custom-file-upload">
+                        <div class="file-upload-icon"></div>
+                        <span>Drop your files here</span>
+                    </label>
+                    <input type="file" id="file" className="file" onChange={handleProductImg} style={{ display: 'none' }} />
 
-            {imageError&&<>
-                    <br></br>
-                    <div className='error-msg'>{imageError}</div>
-            </>}
-            {uploadError&&<>
-                    <br></br>
-                    <div className='error-msg'>{uploadError}</div>
-            </>}
-            {successMsg&&<>
-                <div className='success-msg'>{successMsg}</div>
-                <br></br>
-            </>}
+                    {productImgUrl && (
+                    <div className='image-preview'>
+                        <img src={productImgUrl} alt="Product" />
+                    </div>
+                    )}
 
+                    {imageError&&<>
+                            <br></br>
+                            <div className='error-msg'>{imageError}</div>
+                    </>}
+                    {uploadError&&<>
+                            <br></br>
+                            <div className='error-msg'>{uploadError}</div>
+                    </>}
+                    {successMsg&&<>
+                        <br></br>
+                        <div className='success-msg'>{successMsg}</div>
+                        <br></br>
+                    </>}
+
+                </div>
+                <div className='prod-details'>
+                    <form className='details' onSubmit={handleAddProducts}>
+                        <label>Product Name</label><br></br><br></br>
+                        <input type="text" className="form-control-a" onChange={(e)=>setProductName(e.target.value)} value={productName}></input>
+                        <br></br><br></br><br></br>
+                        <label>Category</label><br></br><br></br>
+                        <input type='text' className='form-control-a' onChange={(e)=>setCategory(e.target.value)} value={category}></input>
+                        <br></br><br></br><br></br>
+                        <label>Price</label><br></br><br></br>
+                        <input type='number' className='form-control-a' onChange={(e)=>setPrice(e.target.value)} value={price}></input>
+                        <br></br><br></br><br></br>
+                        <label>Pieces</label><br></br><br></br>
+                        <input type='number' className='form-control-a' onChange={(e)=>setPieces(e.target.value)} value={pieces}></input>
+                        <br></br><br></br><br></br><br></br>
+                        <button type='submit' className='btn-submit'>Publish product</button>
+                        
+
+                    </form>
+                </div>
+            </div>
         </div>
-        <div className='prod-details'>
-            <form className='details' onSubmit={handleAddProducts}>
-                <label>Product Name</label>
-                <input type="text" className="form-control" onChange={(e)=>setProductName(e.target.value)} value={productName}></input>
-                <br></br>
-                <label>Category</label>
-                <input type='text' className='form-control' onChange={(e)=>setCategory(e.target.value)} value={category}></input>
-                <br></br>
-                <label>Price</label>
-                <input type='number' className='form-control' onChange={(e)=>setPrice(e.target.value)} value={price}></input>
-                <br></br>
-                <label>Pieces</label>
-                <input type='number' className='form-control' onChange={(e)=>setPieces(e.target.value)} value={pieces}></input>
-                <br></br>
-                <button type='submit' className='btn-submit'> Add Product</button>
-                
-
-            </form>
-        </div>
-    </div>
+        
   )
 }
