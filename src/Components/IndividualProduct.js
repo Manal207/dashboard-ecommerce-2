@@ -1,10 +1,30 @@
 import React from 'react'
 import '../CSSFiles/ProductsList.css'
 import { ReactComponent as TrashIcon } from '../icons/trash.svg';
+import { fs } from '../Config/Config';
 
 
-export const IndividualProduct = ({individualProduct}) => {
+export const IndividualProduct = ({individualProduct, onDelete}) => {
     console.log(individualProduct);
+
+    const deleteProductById = async (individualProductId) => {
+        try {
+          await fs.collection('Products').doc(individualProductId).delete();
+          console.log('Product successfully deleted!');
+        } catch (error) {
+          console.error('Error deleting product: ', error);
+        }
+    };
+
+    const handleDelete = async () => {
+        await deleteProductById(individualProduct.ID);
+        onDelete(individualProduct.ID);
+
+        // Optionally, trigger a state update to reflect the change in the UI
+    };
+
+
+
     return (
         <div className='product'>
             <div className='product-img'>
@@ -18,7 +38,7 @@ export const IndividualProduct = ({individualProduct}) => {
                 <div className='product-text price'>Product Price : $ {individualProduct.price}</div><br></br>
                 <div className='product-text pieces'>Number of pieces : {individualProduct.pieces}</div>
             </div>
-            <TrashIcon className="trash-icon" />
+            <div style={{cursor: 'pointer'}} onClick={handleDelete}><TrashIcon className="trash-icon" /></div>
         </div> 
     )
 }

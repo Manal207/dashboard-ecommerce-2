@@ -5,16 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
 import '../CSSFiles/OrdersList.css'
 
-
-
 export const OrdersList = () => {
     const [orders, setOrders]= useState([]);
-
-    const navigate = useNavigate();
-
-    // Function to navigate to the ProductsList
-    
-
 
     // getting products function
     const getOrders = async () => {
@@ -28,8 +20,7 @@ export const OrdersList = () => {
     useEffect(() => {
         getOrders();
     }, []);
-
-   
+  
 
     return (
         <div>

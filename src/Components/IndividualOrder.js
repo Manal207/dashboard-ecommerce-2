@@ -16,7 +16,6 @@ export const IndividualOrder = ({individualOrder}) => {
                 <div className='product-text date'>Order's date : {individualOrder.date}</div><br></br>
                 <div className='product-text status'>Order's status : {individualOrder.status}</div>
             </div>
-            
         </div> 
     )
 }

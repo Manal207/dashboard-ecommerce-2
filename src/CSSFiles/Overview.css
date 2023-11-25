@@ -1,0 +1,46 @@
+
+.row1 , .row2, .row3{
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #777777;
+    font-size: 15px;
+    font-weight: 500;
+
+}
+
+.grid1, .grid2, .grid3, .grid4{
+    width: 35%;
+    height: 160px;
+    background-color: #E7E7E7;
+    margin: 5px 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.row3 .grid1{
+    background-color: #F1F1F1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+
+}
+
+.horizontal-grid{
+    width: 98%;
+    height: 160px;
+    background-color: #E7E7E7;
+    margin: 5px 10px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+}

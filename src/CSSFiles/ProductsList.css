@@ -50,7 +50,7 @@
     width: 95%; 
     background: #F1F1F1; 
     border-radius: 5px; 
-    border: 1px #ABABAB solid;
+    border: 2px #E7E7E7 solid;
     padding: 20px 30px;
     margin-bottom: 15px;
     color: #777777;
@@ -69,6 +69,8 @@
 .trash-icon{
     margin-right: 20px;
 }
+
+
 
 
 

@@ -32,6 +32,12 @@ export const ProductsList = () => {
         getProducts();
     }, []);
 
+    const handleDeleteProduct = (productId) => {
+        setProducts(currentProducts => currentProducts.filter(product => product.ID !== productId));
+    };
+
+    
+
    
 
     return (
@@ -47,7 +53,7 @@ export const ProductsList = () => {
                     
                     <div className='products-box'>
                        
-                        <Products products={products}/>
+                        <Products products={products} onDelete={handleDeleteProduct}/>
 
                     </div>
                 </div>
